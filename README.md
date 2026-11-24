@@ -4,8 +4,12 @@ A cozy couple game set in a little mountain house. You and your person
 live on a pine ridge: fix the porch, plant a garden, light the hearth,
 and watch the day turn to sunset and night.
 
-This is an early private prototype. It is not published, and it should
-stay private until Frog says otherwise.
+A free web build you can play in a desktop or phone browser. All rights
+reserved: you may play it, but please do not copy or republish the source
+without permission.
+
+- Play: [https://m-fin.github.io/mountain-house/](https://m-fin.github.io/mountain-house/)
+- Source: [https://github.com/m-fin/mountain-house](https://github.com/m-fin/mountain-house)
 
 ## Play (local)
 
