@@ -1,0 +1,16 @@
+{
+  "name": "mountain-house",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Hearthridge: a cozy couple game set in a mountain house (private prototype).",
+  "author": "Matthew \"Frog\" Finley",
+  "license": "UNLICENSED",
+  "type": "module",
+  "scripts": {
+    "start": "python3 -m http.server 8766",
+    "test": "node tests/playtest.mjs"
+  },
+  "devDependencies": {
+    "playwright-core": "^1.55.1"
+  }
+}

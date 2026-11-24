@@ -1,0 +1,45 @@
+{
+  "ok": true,
+  "shots": [
+    "/workspace/games/mountain-house/shots/01-sunset-path.png",
+    "/workspace/games/mountain-house/shots/02-porch-and-cabin.png",
+    "/workspace/games/mountain-house/shots/03-hearth-night.png",
+    "/workspace/games/mountain-house/shots/04-mobile-sunset.png"
+  ],
+  "viewports": {
+    "desktop": {
+      "errors": [],
+      "painted": {
+        "ok": true,
+        "nonempty": 64,
+        "colors": 1,
+        "avg": 112.125,
+        "width": 1440,
+        "height": 900
+      }
+    },
+    "desktopInterior": {
+      "errors": []
+    },
+    "mobile": {
+      "errors": [],
+      "painted": {
+        "ok": true,
+        "nonempty": 64,
+        "colors": 1,
+        "avg": 112,
+        "width": 780,
+        "height": 1688
+      },
+      "stickVisible": true,
+      "useVisible": true
+    }
+  },
+  "chrome": "/usr/bin/google-chrome",
+  "tasks": {
+    "porch": true,
+    "garden": 1,
+    "fire": true,
+    "nearWas": null
+  }
+}
