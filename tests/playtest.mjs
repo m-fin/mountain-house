@@ -19,6 +19,9 @@ const MIME = {
   '.png': 'image/png',
   '.svg': 'image/svg+xml',
   '.ico': 'image/x-icon',
+  '.ogg': 'audio/ogg',
+  '.mp3': 'audio/mpeg',
+  '.wav': 'audio/wav',
 };
 
 function startServer() {
@@ -268,6 +271,66 @@ async function main() {
         if (errors.filter((e) => !ignore(e)).length) report.ok = false;
       },
     );
+
+    // ---- Soundtrack: files serve, bed picker, no console errors after a gesture ----
+    await withPage(browser, { width: 1280, height: 800 }, '/?fresh=1&shot=1&time=sunset&freeze=1', async (page, errors) => {
+      await waitReady(page);
+      const files = await page.evaluate(async () => {
+        const names = [
+          'porch_sunset', 'stinger_task', 'explore_day', 'explore_night',
+          'hearth_night', 'garden_morning', 'fixing_up', 'stargazing',
+          'together', 'main_theme', 'stinger_save',
+        ];
+        const out = {};
+        for (const n of names) {
+          const r = await fetch('./music/' + n + '.ogg');
+          out[n] = { status: r.status, type: r.headers.get('content-type') || '', size: (await r.arrayBuffer()).byteLength };
+        }
+        return out;
+      });
+      // Gesture then unlock, tick a default sunset state, and read the chosen bed.
+      await page.click('#mutebtn'); // unlocks; also toggles mute — toggle back
+      await page.click('#mutebtn');
+      const audio = await page.evaluate(async () => {
+        const M = window.MH;
+        await M.audio.unlock();
+        M.begin();
+        M.setTime(0.73);
+        M.audio.tick(M.state);
+        const pick = {
+          sunset: M.audio.chooseBed(M.state),
+        };
+        // Night outdoors, stars
+        M.setTime(0.96);
+        M.place(8, 12);
+        pick.stars = M.audio.chooseBed(M.state);
+        // Lit hearth at night, inside
+        M.state.tasks.fire.lit = true;
+        M.setTime(0.1);
+        M.place(0.2, -1.0);
+        pick.hearth = M.audio.chooseBed(M.state);
+        // All done
+        M.state.tasks.porch.done = true;
+        M.state.tasks.garden.planted = true;
+        M.state.tasks.garden.watered = true;
+        M.state.complete = true;
+        pick.together = M.audio.chooseBed(M.state);
+        return {
+          muted: M.audio.muted,
+          pick,
+          current: M.audio.currentBed,
+        };
+      });
+      report.audio = { files, audio, errors: errors.filter((e) => !ignore(e)) };
+      const missing = Object.entries(files).filter(([, v]) => v.status !== 200 || v.size < 1000);
+      const picksOk = audio.pick.sunset === 'porch_sunset'
+        && audio.pick.stars === 'stargazing'
+        && audio.pick.hearth === 'hearth_night'
+        && audio.pick.together === 'together';
+      if (missing.length || !picksOk || report.audio.errors.length) report.ok = false;
+      if (!picksOk) report.audio.pickFailed = audio.pick;
+      if (missing.length) report.audio.missing = missing;
+    });
   } finally {
     await browser.close();
     await new Promise((r) => server.close(r));

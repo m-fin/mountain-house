@@ -181,6 +181,8 @@
     const muteBtn = document.getElementById('mutebtn');
     const helpPanel = document.getElementById('helppanel');
     const audio = createAudio();
+    muteBtn.textContent = audio.muted ? '×' : '♪';
+    muteBtn.title = audio.muted ? 'Unmute music' : 'Mute music';
 
     const HELP = `${TITLE} controls
 
@@ -189,7 +191,7 @@ Keyboard / mouse
   Mouse — look (click the view to capture the cursor)
   Arrows — turn
   E or Space — hold to work on a task
-  M — mute sound
+  M — mute or unmute music (remembered)
   ? — this panel
 
 Phone
@@ -225,7 +227,12 @@ Progress saves in this browser.`;
 
     addEventListener('keydown', (e) => {
       if ((e.code === 'Slash' && e.shiftKey) || e.key === '?') { toggleHelp(); e.preventDefault(); return; }
-      if (e.code === 'KeyM') { muteBtn.textContent = audio.toggle() ? '×' : '♪'; e.preventDefault(); return; }
+      if (e.code === 'KeyM') {
+        const m = audio.toggle();
+        muteBtn.textContent = m ? '×' : '♪';
+        muteBtn.title = m ? 'Unmute music' : 'Mute music';
+        e.preventDefault(); return;
+      }
       if (e.code === 'Escape') { helpPanel.classList.remove('show'); return; }
       if (['KeyW','KeyA','KeyS','KeyD','Space','KeyE','ArrowLeft','ArrowRight','ArrowUp','ArrowDown'].includes(e.code)) {
         keys.add(e.code);
@@ -319,6 +326,7 @@ Progress saves in this browser.`;
       audio.unlock();
       const m = audio.toggle();
       muteBtn.textContent = m ? '×' : '♪';
+      muteBtn.title = m ? 'Unmute music' : 'Mute music';
     });
     helpPanel.addEventListener('click', (e) => e.stopPropagation());
     addEventListener('pointerdown', (e) => {
@@ -393,6 +401,7 @@ Progress saves in this browser.`;
       R.update(state, dt);
       R.render();
       showHud();
+      audio.tick(state);
       frames++;
       if (frames === 1) {
         canvas.dataset.ready = '1';
@@ -406,6 +415,7 @@ Progress saves in this browser.`;
     window.MH = {
       get state() { return state; },
       get renderer() { return R; },
+      get audio() { return audio; },
       TITLE,
       begin,
       persist: () => persist(state),

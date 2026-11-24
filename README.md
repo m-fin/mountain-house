@@ -35,7 +35,11 @@ save. `?time=sunset|day|night|dawn` jumps the sky for a screenshot.
   (watering the garden if you have planted it).
 - Three tasks: repair a broken porch board, plant and water a garden
   bed that grows over time, and light the fireplace.
-- Soft original ambient sound (wind and a quiet pad). Mute from the UI.
+- An original scored soundtrack (felt piano, guitar-like plucks, strings)
+  that follows the time of day, the porch, the garden, the lit hearth, and
+  whether you are fixing something or have made the house your own. Soft
+  procedural wind stays underneath. Music starts after the first tap or
+  keypress. The mute button (M) is remembered in this browser.
 
 Built like DRIFTHOME: plain JavaScript ES modules and vendored
 [three.js](https://threejs.org/) 0.186, no build step and no CDN.

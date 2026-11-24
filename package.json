@@ -8,7 +8,7 @@
   "type": "module",
   "scripts": {
     "start": "python3 -m http.server 8766",
-    "test": "node tests/playtest.mjs"
+    "test": "node tests/audio-logic.mjs && node tests/playtest.mjs"
   },
   "devDependencies": {
     "playwright-core": "^1.55.1"

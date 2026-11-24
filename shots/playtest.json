@@ -13,7 +13,7 @@
         "ok": true,
         "nonempty": 64,
         "colors": 1,
-        "avg": 112.125,
+        "avg": 112,
         "width": 1440,
         "height": 900
       }
@@ -41,5 +41,75 @@
     "garden": 1,
     "fire": true,
     "nearWas": null
+  },
+  "audio": {
+    "files": {
+      "porch_sunset": {
+        "status": 200,
+        "type": "audio/ogg",
+        "size": 408111
+      },
+      "stinger_task": {
+        "status": 200,
+        "type": "audio/ogg",
+        "size": 33888
+      },
+      "explore_day": {
+        "status": 200,
+        "type": "audio/ogg",
+        "size": 356567
+      },
+      "explore_night": {
+        "status": 200,
+        "type": "audio/ogg",
+        "size": 352734
+      },
+      "hearth_night": {
+        "status": 200,
+        "type": "audio/ogg",
+        "size": 411477
+      },
+      "garden_morning": {
+        "status": 200,
+        "type": "audio/ogg",
+        "size": 459373
+      },
+      "fixing_up": {
+        "status": 200,
+        "type": "audio/ogg",
+        "size": 429071
+      },
+      "stargazing": {
+        "status": 200,
+        "type": "audio/ogg",
+        "size": 384012
+      },
+      "together": {
+        "status": 200,
+        "type": "audio/ogg",
+        "size": 399075
+      },
+      "main_theme": {
+        "status": 200,
+        "type": "audio/ogg",
+        "size": 737646
+      },
+      "stinger_save": {
+        "status": 200,
+        "type": "audio/ogg",
+        "size": 22095
+      }
+    },
+    "audio": {
+      "muted": false,
+      "pick": {
+        "sunset": "porch_sunset",
+        "stars": "stargazing",
+        "hearth": "hearth_night",
+        "together": "together"
+      },
+      "current": "porch_sunset"
+    },
+    "errors": []
   }
 }
